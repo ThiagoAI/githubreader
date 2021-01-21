@@ -1,0 +1,2 @@
+com/thiago/githubreader/GithubreaderApplicationTests.java
+ com.thiago.githubreader.GithubreaderApplicationTests

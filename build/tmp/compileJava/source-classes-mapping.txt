@@ -1,0 +1,14 @@
+com/thiago/githubreader/adapters/web/model/ReadRepoFileApiModel.java
+ com.thiago.githubreader.adapters.web.model.ReadRepoFileApiModel
+com/thiago/githubreader/adapters/web/api/ReadrepoApi.java
+ com.thiago.githubreader.adapters.web.api.ReadrepoApi
+com/thiago/githubreader/adapters/web/model/ReadRepoResponseApiModel.java
+ com.thiago.githubreader.adapters.web.model.ReadRepoResponseApiModel
+com/thiago/githubreader/GithubreaderApplication.java
+ com.thiago.githubreader.GithubreaderApplication
+com/thiago/githubreader/adapters/web/model/ReadRepoGroupApiModel.java
+ com.thiago.githubreader.adapters.web.model.ReadRepoGroupApiModel
+com/thiago/githubreader/adapters/web/api/ApiUtil.java
+ com.thiago.githubreader.adapters.web.api.ApiUtil
+com/thiago/githubreader/adapters/web/controllers/ReadrepoApiImpl.java
+ com.thiago.githubreader.adapters.web.controllers.ReadrepoApiImpl
