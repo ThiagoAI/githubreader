@@ -1,2 +1,4 @@
-package com.thiago.githubreader.domain;public class GitHubGetThread {
+package com.thiago.githubreader.domain;
+
+public class GitHubGetThread {
 }

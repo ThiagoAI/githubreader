@@ -5,6 +5,7 @@
  */
 package com.thiago.githubreader.adapters.web.api;
 
+import com.thiago.githubreader.adapters.web.model.ReadRepoRequestApiModel;
 import com.thiago.githubreader.adapters.web.model.ReadRepoResponseApiModel;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -33,20 +34,21 @@ import java.util.Optional;
 public interface ReadrepoApi {
 
     /**
-     * GET /readrepo/{repoURL} : Your GET endpoint
+     * POST /readrepo : Read repo
      * Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.
      *
-     * @param repoURL  (required)
+     * @param readRepoRequestApiModel  (optional)
      * @return OK (status code 200)
      *         or Not Found (status code 404)
      */
-    @ApiOperation(value = "Your GET endpoint", nickname = "readrepo", notes = "Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.", response = ReadRepoResponseApiModel.class, tags={  })
+    @ApiOperation(value = "Read repo", nickname = "readrepo", notes = "Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.", response = ReadRepoResponseApiModel.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ReadRepoResponseApiModel.class),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/readrepo/{repoURL}",
+    @RequestMapping(value = "/readrepo",
         produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<ReadRepoResponseApiModel> readrepo(@ApiParam(value = "",required=true) @PathVariable("repoURL") String repoURL);
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    ResponseEntity<ReadRepoResponseApiModel> readrepo(@ApiParam(value = ""  )  @Valid @RequestBody(required = false) ReadRepoRequestApiModel readRepoRequestApiModel);
 
 }

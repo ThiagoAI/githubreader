@@ -5,9 +5,9 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/readrepo/{repoURL}':
-    get:
-      summary: Your GET endpoint
+  /readrepo:
+    post:
+      summary: Read repo
       tags: []
       responses:
         '200':
@@ -20,12 +20,12 @@ paths:
           description: Not Found
       operationId: readrepo
       description: 'Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.'
-    parameters:
-      - schema:
-          type: string
-        name: repoURL
-        in: path
-        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadRepoRequest'
+    parameters: []
 components:
   schemas:
     ReadRepoResponse:
@@ -77,3 +77,11 @@ components:
         - name
         - lineCount
         - size
+    ReadRepoRequest:
+      title: ReadRepoRequest
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+        - url
