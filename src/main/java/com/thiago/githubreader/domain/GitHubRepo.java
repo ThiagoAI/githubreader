@@ -2,10 +2,7 @@ package com.thiago.githubreader.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class GitHubRepo {
     private final GitHubRepoFileContainer gitHubRepoFileContainer;
@@ -29,7 +26,15 @@ public class GitHubRepo {
         return this.gitHubRepoFileContainer.getTotalBytes();
     }
 
+    public String getTotalBytesFormattedString() {
+        return this.gitHubRepoFileContainer.getTotalBytesFormattedString();
+    }
+
     public long getTotalLines() {
         return this.gitHubRepoFileContainer.getTotalLines();
+    }
+
+    public long getFileCount() {
+        return this.gitHubRepoFileContainer.fileCount();
     }
 }

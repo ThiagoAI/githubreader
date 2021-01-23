@@ -37,7 +37,16 @@ public class GitHubRepoFileContainer {
         return totalBytes;
     }
 
+    public String getTotalBytesFormattedString() {
+        return BytesFormatter.formatBytes(this.totalBytes);
+    }
+
     public Map<String, GitHubRepoFileExtensionList> getMap() {
         return map;
+    }
+
+    public long fileCount() {
+        return this.map.values().stream()
+                .map(i -> i.fileCount()).reduce(0L, (i, e) -> i + e);
     }
 }

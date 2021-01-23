@@ -10,8 +10,8 @@ public class GithubreaderConfiguration {
     @Bean
     public HttpClientConnectionManager httpClientConnectionManager() {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        connectionManager.setMaxTotal(2000);
-        connectionManager.setDefaultMaxPerRoute(100);
+        connectionManager.setMaxTotal(6000);
+        connectionManager.setDefaultMaxPerRoute(8);
         return connectionManager;
     }
 }

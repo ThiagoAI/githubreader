@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 public final class GitHubRepoApiMapper {
     public static ReadRepoResponseApiModel toGitHubRepoModel(GitHubRepo gitHubRepo) {
         return new ReadRepoResponseApiModel()
-                .totalSize(String.valueOf(gitHubRepo.getTotalBytes()))
+                .totalSize(String.valueOf(gitHubRepo.getTotalBytesFormattedString()))
                 .totalLines(BigDecimal.valueOf(gitHubRepo.getTotalLines()))
+                .fileCount(BigDecimal.valueOf(gitHubRepo.getFileCount()))
                 .fileGroups(gitHubRepo.getGitHubRepoFileContainer().getMap().values()
                         .stream().map(list -> GitHubRepoFileGroupApiMapper
                                 .toReadRepoGroupApiModel(list)).collect(Collectors.toList())

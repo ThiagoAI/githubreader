@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GithubreaderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GithubreaderApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GithubreaderApplication.class, args);
+    }
 
 }

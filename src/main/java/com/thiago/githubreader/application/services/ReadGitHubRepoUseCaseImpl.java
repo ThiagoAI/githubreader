@@ -1,9 +1,9 @@
 package com.thiago.githubreader.application.services;
 
 import com.thiago.githubreader.application.ports.in.ReadGitHubRepoUseCase;
+import com.thiago.githubreader.domain.GitHubRepo;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandler;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandlerImpl;
-import com.thiago.githubreader.domain.GitHubRepo;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.springframework.scheduling.annotation.Async;
@@ -28,14 +28,15 @@ public class ReadGitHubRepoUseCaseImpl implements ReadGitHubRepoUseCase {
 //        urlValidator.isValid("http://my favorite site!");
 
         // Stablishes connection to repo
-        GitHubRepoConnectionHandler gitHubRepoConnectionHandler = new GitHubRepoConnectionHandlerImpl(httpClientConnectionManager);
-        gitHubRepoConnectionHandler.openConnection(gitHubUrl);
-
-        // Creates repo object
-//        String html = gitHubRepoConnectionHandler.httpGetRequestToString(gitHubUrl);
-        GitHubRepo gitHubRepo = new GitHubRepo(gitHubUrl, gitHubRepoConnectionHandler);
-        // TODO Fix close connection
-//        gitHubRepoConnectionHandler.closeConnection();
+        GitHubRepo gitHubRepo;
+        GitHubRepoConnectionHandler gitHubRepoConnectionHandler =
+                new GitHubRepoConnectionHandlerImpl(httpClientConnectionManager);
+        gitHubRepoConnectionHandler.openConnection();
+        try {
+            gitHubRepo = new GitHubRepo(gitHubUrl, gitHubRepoConnectionHandler);
+        } finally {
+            gitHubRepoConnectionHandler.closeConnection();
+        }
 
         return CompletableFuture.completedFuture(gitHubRepo);
     }

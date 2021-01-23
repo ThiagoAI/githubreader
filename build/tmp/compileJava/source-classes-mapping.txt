@@ -1,52 +1,58 @@
-com/thiago/githubreader/domain/BytesSize.java
- com.thiago.githubreader.domain.BytesSize
+com/thiago/githubreader/domain/GitHubRepoFileContainer.java
+ com.thiago.githubreader.domain.GitHubRepoFileContainer
 com/thiago/githubreader/domain/GitHubRepoDirParser.java
  com.thiago.githubreader.domain.GitHubRepoDirParser
 com/thiago/githubreader/domain/GitHubRepoConnectionHandler.java
  com.thiago.githubreader.domain.GitHubRepoConnectionHandler
+com/thiago/githubreader/domain/GitHubFileGetterExecutionController.java
+ com.thiago.githubreader.domain.GitHubFileGetterExecutionController
 com/thiago/githubreader/adapters/web/model/ReadRepoGroupApiModel.java
  com.thiago.githubreader.adapters.web.model.ReadRepoGroupApiModel
 com/thiago/githubreader/application/ports/in/ReadGitHubRepoUseCase.java
  com.thiago.githubreader.application.ports.in.ReadGitHubRepoUseCase
-com/thiago/githubreader/GithubreaderApplication.java
- com.thiago.githubreader.GithubreaderApplication
+com/thiago/githubreader/adapters/web/mappers/GitHubRepoFileApiMapper.java
+ com.thiago.githubreader.adapters.web.mappers.GitHubRepoFileApiMapper
 com/thiago/githubreader/adapters/web/api/ReadrepoApi.java
  com.thiago.githubreader.adapters.web.api.ReadrepoApi
 com/thiago/githubreader/adapters/web/model/ReadRepoResponseApiModel.java
  com.thiago.githubreader.adapters.web.model.ReadRepoResponseApiModel
-com/thiago/githubreader/domain/LineCount.java
- com.thiago.githubreader.domain.LineCount
-com/thiago/githubreader/adapters/web/controllers/ReadrepoApiImpl.java
- com.thiago.githubreader.adapters.web.controllers.ReadrepoApiImpl
-com/thiago/githubreader/domain/GitHubRepoConnectionHandlerImpl.java
- com.thiago.githubreader.domain.GitHubRepoConnectionHandlerImpl
-com/thiago/githubreader/GithubreaderConfiguration.java
- com.thiago.githubreader.GithubreaderConfiguration
-com/thiago/githubreader/adapters/web/api/ApiUtil.java
- com.thiago.githubreader.adapters.web.api.ApiUtil
-com/thiago/githubreader/adapters/web/model/ReadRepoFileApiModel.java
- com.thiago.githubreader.adapters.web.model.ReadRepoFileApiModel
-com/thiago/githubreader/domain/FileName.java
- com.thiago.githubreader.domain.FileName
-com/thiago/githubreader/adapters/web/model/ReadRepoRequestApiModel.java
- com.thiago.githubreader.adapters.web.model.ReadRepoRequestApiModel
-com/thiago/githubreader/domain/GitHubRepoFileContainer.java
- com.thiago.githubreader.domain.GitHubRepoFileContainer
-com/thiago/githubreader/adapters/web/mappers/GitHubRepoFileApiMapper.java
- com.thiago.githubreader.adapters.web.mappers.GitHubRepoFileApiMapper
-com/thiago/githubreader/domain/GitHubRepoFileExtensionList.java
- com.thiago.githubreader.domain.GitHubRepoFileExtensionList
-com/thiago/githubreader/domain/GitHubFile.java
- com.thiago.githubreader.domain.GitHubFile
-com/thiago/githubreader/adapters/web/mappers/GitHubRepoFileGroupApiMapper.java
- com.thiago.githubreader.adapters.web.mappers.GitHubRepoFileGroupApiMapper
-com/thiago/githubreader/domain/GitHubGetThread.java
- com.thiago.githubreader.domain.GitHubGetThread
 com/thiago/githubreader/adapters/web/mappers/GitHubRepoApiMapper.java
  com.thiago.githubreader.adapters.web.mappers.GitHubRepoApiMapper
-com/thiago/githubreader/application/services/ReadGitHubRepoUseCaseImpl.java
- com.thiago.githubreader.application.services.ReadGitHubRepoUseCaseImpl
-com/thiago/githubreader/domain/GitHubRepoFileGetter.java
- com.thiago.githubreader.domain.GitHubRepoFileGetter
+com/thiago/githubreader/adapters/web/mappers/GitHubRepoFileGroupApiMapper.java
+ com.thiago.githubreader.adapters.web.mappers.GitHubRepoFileGroupApiMapper
+com/thiago/githubreader/domain/GitHubRepoConnectionHandlerImpl.java
+ com.thiago.githubreader.domain.GitHubRepoConnectionHandlerImpl
 com/thiago/githubreader/domain/GitHubRepo.java
  com.thiago.githubreader.domain.GitHubRepo
+com/thiago/githubreader/domain/GitHubRepoFileExtensionList.java
+ com.thiago.githubreader.domain.GitHubRepoFileExtensionList
+com/thiago/githubreader/domain/BytesSize.java
+ com.thiago.githubreader.domain.BytesSize
+com/thiago/githubreader/application/services/ReadGitHubRepoUseCaseImpl.java
+ com.thiago.githubreader.application.services.ReadGitHubRepoUseCaseImpl
+com/thiago/githubreader/domain/FileName.java
+ com.thiago.githubreader.domain.FileName
+com/thiago/githubreader/domain/BytesFormatter.java
+ com.thiago.githubreader.domain.BytesFormatter
+com/thiago/githubreader/adapters/web/model/ReadRepoRequestApiModel.java
+ com.thiago.githubreader.adapters.web.model.ReadRepoRequestApiModel
+com/thiago/githubreader/adapters/web/controllers/ReadrepoApiImpl.java
+ com.thiago.githubreader.adapters.web.controllers.ReadrepoApiImpl
+com/thiago/githubreader/adapters/web/model/ReadRepoFileApiModel.java
+ com.thiago.githubreader.adapters.web.model.ReadRepoFileApiModel
+com/thiago/githubreader/domain/BytesConstants.java
+ com.thiago.githubreader.domain.BytesConstants
+com/thiago/githubreader/adapters/web/api/ApiUtil.java
+ com.thiago.githubreader.adapters.web.api.ApiUtil
+com/thiago/githubreader/GithubreaderApplication.java
+ com.thiago.githubreader.GithubreaderApplication
+com/thiago/githubreader/GithubreaderConfiguration.java
+ com.thiago.githubreader.GithubreaderConfiguration
+com/thiago/githubreader/domain/GitHubFile.java
+ com.thiago.githubreader.domain.GitHubFile
+com/thiago/githubreader/domain/LineCount.java
+ com.thiago.githubreader.domain.LineCount
+com/thiago/githubreader/domain/GitHubRepoFileGetter.java
+ com.thiago.githubreader.domain.GitHubRepoFileGetter
+com/thiago/githubreader/domain/GitHubGetThread.java
+ com.thiago.githubreader.domain.GitHubGetThread

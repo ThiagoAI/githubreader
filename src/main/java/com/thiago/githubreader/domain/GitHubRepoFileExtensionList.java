@@ -1,10 +1,7 @@
 package com.thiago.githubreader.domain;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class GitHubRepoFileExtensionList {
     private long totalLines;
@@ -40,5 +37,9 @@ public class GitHubRepoFileExtensionList {
 
     public List<GitHubFile> getList() {
         return list;
+    }
+
+    public long fileCount() {
+        return this.list.stream().count();
     }
 }

@@ -1,11 +1,10 @@
 package com.thiago.githubreader.domain;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LineCount {
+public final class LineCount {
     private final long numberOfLines;
 
     /**
@@ -25,10 +24,12 @@ public class LineCount {
                         .compile(">[\\n\\s\\t]*(\\d+)\\slines")
                         .matcher(linesString);
                 matcher.find();
-                System.out.println("eae: " + matcher.group(1));
                 numberOfLines = Long.parseLong(matcher.group(1));
+            } catch (IllegalStateException e) {
+                // Some files don't have a number of lines
+                numberOfLines = 0;
             } catch (Exception e) {
-                // TODO handle null and number format
+                // Unexpected
                 e.printStackTrace();
                 numberOfLines = 0;
             }

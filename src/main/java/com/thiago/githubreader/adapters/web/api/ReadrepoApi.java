@@ -40,11 +40,13 @@ public interface ReadrepoApi {
      * @param readRepoRequestApiModel  (optional)
      * @return OK (status code 200)
      *         or Not Found (status code 404)
+     *         or Unprocessable Entity (WebDAV) (status code 422)
      */
     @ApiOperation(value = "Read repo", nickname = "readrepo", notes = "Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.", response = ReadRepoResponseApiModel.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ReadRepoResponseApiModel.class),
-        @ApiResponse(code = 404, message = "Not Found") })
+        @ApiResponse(code = 404, message = "Not Found"),
+        @ApiResponse(code = 422, message = "Unprocessable Entity (WebDAV)") })
     @RequestMapping(value = "/readrepo",
         produces = { "application/json" }, 
         consumes = { "application/json" },

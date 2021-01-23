@@ -10,7 +10,7 @@ public class GitHubFile {
     public GitHubFile(@NotBlank String html) {
         this.bytesSize = new BytesSize(html);
         this.lineCount = new LineCount(html);
-        this.fileName  = new FileName(html);
+        this.fileName = new FileName(html);
     }
 
     public BytesSize getBytesSize() {

@@ -18,6 +18,8 @@ paths:
                 $ref: '#/components/schemas/ReadRepoResponse'
         '404':
           description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
       operationId: readrepo
       description: 'Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.'
       requestBody:
@@ -31,11 +33,14 @@ components:
     ReadRepoResponse:
       title: ReadRepoResponse
       type: object
+      description: ''
       properties:
         totalLines:
           type: number
         totalSize:
           type: string
+        fileCount:
+          type: number
         fileGroups:
           type: array
           items:
@@ -43,6 +48,7 @@ components:
       required:
         - totalLines
         - totalSize
+        - fileCount
         - fileGroups
     ReadRepoGroup:
       title: ReadRepoGroup

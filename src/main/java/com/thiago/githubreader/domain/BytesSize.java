@@ -4,12 +4,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BytesSize {
-    // Multipliers for transforming to bytes
-    private static final long KB_MULTIPLIER = 1024;
-    private static final long MB_MULTIPLIER = 1048576;
-    private static final long GB_MULTIPLIER = 1073741824;
-
+public final class BytesSize {
     private final double bytes;
     private final @NotBlank String bytesString;
 
@@ -44,18 +39,21 @@ public class BytesSize {
         // Gets multiplier and uses it to store value as bytes
         long multiplier = 0;
         switch (fileSizeExtension){
-            case "Bytes":
+            case BytesConstants.BYTES_SUFIX:
                 multiplier = 1;
                 break;
-            case "KB":
-                multiplier = KB_MULTIPLIER;
-            case "MB":
-                multiplier = MB_MULTIPLIER;
-            case "GB":
-                multiplier = GB_MULTIPLIER;
+            case BytesConstants.KB_SUFIX:
+                multiplier = BytesConstants.KB_MULTIPLIER;
+                break;
+            case BytesConstants.MB_SUFIX:
+                multiplier = BytesConstants.MB_MULTIPLIER;
+                break;
+            case BytesConstants.GB_SUFIX:
+                multiplier = BytesConstants.GB_MULTIPLIER;
+                break;
             default:
-                // TODO add exception
                 multiplier = 0;
+                break;
         }
         this.bytes = multiplier*fileSize;
     }

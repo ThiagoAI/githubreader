@@ -24,6 +24,9 @@ public class ReadRepoResponseApiModel   {
   @JsonProperty("totalSize")
   private String totalSize;
 
+  @JsonProperty("fileCount")
+  private BigDecimal fileCount;
+
   @JsonProperty("fileGroups")
   @Valid
   private List<ReadRepoGroupApiModel> fileGroups = new ArrayList<>();
@@ -71,6 +74,28 @@ public class ReadRepoResponseApiModel   {
     this.totalSize = totalSize;
   }
 
+  public ReadRepoResponseApiModel fileCount(BigDecimal fileCount) {
+    this.fileCount = fileCount;
+    return this;
+  }
+
+  /**
+   * Get fileCount
+   * @return fileCount
+  */
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
+  public BigDecimal getFileCount() {
+    return fileCount;
+  }
+
+  public void setFileCount(BigDecimal fileCount) {
+    this.fileCount = fileCount;
+  }
+
   public ReadRepoResponseApiModel fileGroups(List<ReadRepoGroupApiModel> fileGroups) {
     this.fileGroups = fileGroups;
     return this;
@@ -110,12 +135,13 @@ public class ReadRepoResponseApiModel   {
     ReadRepoResponseApiModel readRepoResponse = (ReadRepoResponseApiModel) o;
     return Objects.equals(this.totalLines, readRepoResponse.totalLines) &&
         Objects.equals(this.totalSize, readRepoResponse.totalSize) &&
+        Objects.equals(this.fileCount, readRepoResponse.fileCount) &&
         Objects.equals(this.fileGroups, readRepoResponse.fileGroups);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(totalLines, totalSize, fileGroups);
+    return Objects.hash(totalLines, totalSize, fileCount, fileGroups);
   }
 
   @Override
@@ -125,6 +151,7 @@ public class ReadRepoResponseApiModel   {
     
     sb.append("    totalLines: ").append(toIndentedString(totalLines)).append("\n");
     sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
+    sb.append("    fileCount: ").append(toIndentedString(fileCount)).append("\n");
     sb.append("    fileGroups: ").append(toIndentedString(fileGroups)).append("\n");
     sb.append("}");
     return sb.toString();
