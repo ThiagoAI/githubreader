@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Async;
 
 import javax.validation.constraints.NotBlank;
 
-public interface ConnectionHandler {
+public interface GitHubRepoConnectionHandler {
     void openConnection(@NotBlank String url);
     String httpGetRequestToString(@NotBlank String url);
     void closeConnection();

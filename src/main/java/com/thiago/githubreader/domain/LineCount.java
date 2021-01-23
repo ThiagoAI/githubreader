@@ -2,13 +2,14 @@ package com.thiago.githubreader.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LineCount {
     private final long numberOfLines;
 
     /**
-     * Receives a string like "21 lines (17 sloc)" and processes it into the number of lines
+     * Receives github html and tries to get number of lines
      *
      * @param linesString input string
      */
@@ -20,14 +21,22 @@ public class LineCount {
         } else {
             // Gets first number and assigns it as number of lines
             try {
-                numberOfLines = Long.parseLong(
-                        Pattern.compile("([\\d]*)").matcher(linesString).group(1)
-                );
+                Matcher matcher = Pattern
+                        .compile(">[\\n\\s\\t]*(\\d+)\\slines")
+                        .matcher(linesString);
+                matcher.find();
+                System.out.println("eae: " + matcher.group(1));
+                numberOfLines = Long.parseLong(matcher.group(1));
             } catch (Exception e) {
                 // TODO handle null and number format
+                e.printStackTrace();
                 numberOfLines = 0;
             }
         }
         this.numberOfLines = numberOfLines;
+    }
+
+    public long getNumberOfLines() {
+        return numberOfLines;
     }
 }

@@ -1,6 +1,7 @@
 package com.thiago.githubreader.domain;
 
 import javax.validation.constraints.NotBlank;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BytesSize {
@@ -13,28 +14,36 @@ public class BytesSize {
     private final @NotBlank String bytesString;
 
     /**
-     * Receives a string like "15.01 KB" or "425 Bytes" and process it into number of bytes
+     * Receives a github html and tries to get size of file
      *
-     * @param bytesString input string
+     * @param html input string
      */
-    public BytesSize(@NotBlank String bytesString) {
-        this.bytesString = bytesString;
+    public BytesSize(@NotBlank String html) {
+
+        String bytesString;
+        double fileSize = 0;
 
         // Gets number and extension (Bytes, KB, MB ...)
-        double fileSize = 0;
+        String fileSizeExtension = "";
         try {
-            fileSize = Double.parseDouble(
-                    Pattern.compile("([\\d\\.]*)").matcher(bytesString).group(1)
-            );
+            Matcher matcher = Pattern
+                    .compile(">[\\n\\s\\t]*([\\d\\.^]+)\\s(Bytes|[KMG]B)[\\s\\n\\t]*<")
+                    .matcher(html);
+            matcher.find();
+            fileSize = Double.parseDouble(matcher.group(1));
+            fileSizeExtension = matcher.group(2);
+            bytesString = fileSize + " " + fileSizeExtension;
         } catch (Exception e) {
             // TODO actually handle null and number format
+            e.printStackTrace();
             fileSize = 0;
+            bytesString = "0 Bytes";
         }
+        this.bytesString = bytesString;
 
-        String extension = bytesString.replaceAll("([\\d\\.]*)", "").trim();
         // Gets multiplier and uses it to store value as bytes
-        long multiplier = 1;
-        switch (extension){
+        long multiplier = 0;
+        switch (fileSizeExtension){
             case "Bytes":
                 multiplier = 1;
                 break;
@@ -45,6 +54,7 @@ public class BytesSize {
             case "GB":
                 multiplier = GB_MULTIPLIER;
             default:
+                // TODO add exception
                 multiplier = 0;
         }
         this.bytes = multiplier*fileSize;

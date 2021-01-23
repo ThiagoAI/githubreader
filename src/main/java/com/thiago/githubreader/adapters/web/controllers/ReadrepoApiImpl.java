@@ -19,6 +19,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequiredArgsConstructor
@@ -93,10 +95,18 @@ public class ReadrepoApiImpl implements ReadrepoApi {
 //                        .fileGroups(new LinkedList<>())
 //        );
 
-        return ResponseEntity.ok(
-                GitHubRepoApiMapper.toGitHubRepoModel(
-                        readGitHubRepoUseCase.readGitHubRepo(
-                                readRepoRequestApiModel.getUrl()))
-        );
+        try {
+            return ResponseEntity.ok(
+                    GitHubRepoApiMapper.toGitHubRepoModel(
+                            readGitHubRepoUseCase.readGitHubRepo(
+                                    readRepoRequestApiModel.getUrl()).get())
+            );
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

@@ -4,11 +4,16 @@ import com.thiago.githubreader.adapters.web.model.ReadRepoResponseApiModel;
 import com.thiago.githubreader.domain.GitHubRepo;
 
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 
 public final class GitHubRepoApiMapper {
-    public static ReadRepoResponseApiModel toGitHubRepoModel(GitHubRepo gitHubRepo){
+    public static ReadRepoResponseApiModel toGitHubRepoModel(GitHubRepo gitHubRepo) {
         return new ReadRepoResponseApiModel()
-                .totalLines(BigDecimal.valueOf(gitHubRepo.getTotalLineCount()))
-                .totalSize(gitHubRepo.getTotalByteSize());
+                .totalSize(String.valueOf(gitHubRepo.getTotalBytes()))
+                .totalLines(BigDecimal.valueOf(gitHubRepo.getTotalLines()))
+                .fileGroups(gitHubRepo.getGitHubRepoFileContainer().getMap().values()
+                        .stream().map(list -> GitHubRepoFileGroupApiMapper
+                                .toReadRepoGroupApiModel(list)).collect(Collectors.toList())
+                );
     }
 }
