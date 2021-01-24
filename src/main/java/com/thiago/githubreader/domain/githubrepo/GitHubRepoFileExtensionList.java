@@ -1,4 +1,6 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.githubrepo;
+
+import com.thiago.githubreader.domain.BytesFormatter;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -29,6 +31,10 @@ public class GitHubRepoFileExtensionList {
 
     public double getTotalBytes() {
         return totalBytes;
+    }
+
+    public String getTotalBytesFormattedString() {
+        return BytesFormatter.formatBytes(this.totalBytes);
     }
 
     public String getFileExtension() {

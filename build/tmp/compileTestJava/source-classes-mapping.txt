@@ -1,4 +1,0 @@
-com/thiago/githubreader/GithubreaderApplicationTests.java
- com.thiago.githubreader.GithubreaderApplicationTests
-com/thiago/githubreader/GithubreaderApiTests.java
- com.thiago.githubreader.GithubreaderApiTests

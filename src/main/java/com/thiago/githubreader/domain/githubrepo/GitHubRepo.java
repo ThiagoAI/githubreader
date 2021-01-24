@@ -1,4 +1,7 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.githubrepo;
+
+import com.thiago.githubreader.domain.GitHubRepoConnectionHandler;
+import com.thiago.githubreader.domain.GitHubRepoFileGetter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

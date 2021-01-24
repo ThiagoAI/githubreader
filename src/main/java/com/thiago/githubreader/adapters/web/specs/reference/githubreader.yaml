@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
-  title: githubreader
+  title: GitHubReader
   version: '1.0'
-servers:
-  - url: 'http://localhost:3000'
+  description: API for GitHubRepoReader.
+servers: []
 paths:
   /readrepo:
     post:
@@ -21,7 +21,7 @@ paths:
         '422':
           description: Unprocessable Entity (WebDAV)
       operationId: readrepo
-      description: 'Scrapes a github repo, returning the number of lines and size of all files grouped by file extension.'
+      description: 'Scrapes a github repo, returning the name, number of lines and size of all files grouped by file extension.'
       requestBody:
         content:
           application/json:

@@ -1,5 +1,7 @@
 package com.thiago.githubreader.domain;
 
+import com.thiago.githubreader.domain.githubrepo.GitHubRepo;
+
 import javax.validation.constraints.NotNull;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

@@ -1,8 +1,9 @@
 package com.thiago.githubreader.application.services;
 
+import com.thiago.githubreader.application.exceptions.FailedToGetGitHubFilesException;
 import com.thiago.githubreader.application.ports.in.ReadGitHubRepoUseCase;
 import com.thiago.githubreader.domain.GitHubConstants;
-import com.thiago.githubreader.domain.GitHubRepo;
+import com.thiago.githubreader.domain.githubrepo.GitHubRepo;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandler;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandlerImpl;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +31,14 @@ public class ReadGitHubRepoUseCaseImpl implements ReadGitHubRepoUseCase {
             throw new ValidationException();
 
         // Stablishes connection to repo
-        GitHubRepo gitHubRepo;
-        GitHubRepoConnectionHandler gitHubRepoConnectionHandler =
-                new GitHubRepoConnectionHandlerImpl(httpClientConnectionManager);
+        GitHubRepo gitHubRepo = null;
+        GitHubRepoConnectionHandler gitHubRepoConnectionHandler = new GitHubRepoConnectionHandlerImpl(httpClientConnectionManager);
         gitHubRepoConnectionHandler.openConnection();
         try {
             gitHubRepo = new GitHubRepo(gitHubUrl, gitHubRepoConnectionHandler);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new FailedToGetGitHubFilesException(gitHubUrl);
         } finally {
             gitHubRepoConnectionHandler.closeConnection();
         }

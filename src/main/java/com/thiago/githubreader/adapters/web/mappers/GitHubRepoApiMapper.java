@@ -1,7 +1,7 @@
 package com.thiago.githubreader.adapters.web.mappers;
 
 import com.thiago.githubreader.adapters.web.model.ReadRepoResponseApiModel;
-import com.thiago.githubreader.domain.GitHubRepo;
+import com.thiago.githubreader.domain.githubrepo.GitHubRepo;
 
 import java.math.BigDecimal;
 import java.util.stream.Collectors;

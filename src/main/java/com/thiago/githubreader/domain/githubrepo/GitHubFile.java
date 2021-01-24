@@ -1,4 +1,8 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.githubrepo;
+
+import com.thiago.githubreader.domain.BytesSize;
+import com.thiago.githubreader.domain.FileName;
+import com.thiago.githubreader.domain.LineCount;
 
 import javax.validation.constraints.NotBlank;
 

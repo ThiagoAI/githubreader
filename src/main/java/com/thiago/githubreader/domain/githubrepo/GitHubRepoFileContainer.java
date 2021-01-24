@@ -1,4 +1,6 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.githubrepo;
+
+import com.thiago.githubreader.domain.BytesFormatter;
 
 import java.util.ArrayList;
 import java.util.Map;

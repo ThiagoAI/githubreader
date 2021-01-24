@@ -1,5 +1,8 @@
 package com.thiago.githubreader.domain;
 
+import com.thiago.githubreader.domain.githubrepo.GitHubFile;
+import com.thiago.githubreader.domain.githubrepo.GitHubRepoFileContainer;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
