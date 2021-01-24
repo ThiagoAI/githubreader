@@ -1,4 +1,4 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.connectionhandler;
 
 import com.revinate.guava.util.concurrent.RateLimiter;
 import org.apache.http.HttpEntity;
@@ -13,16 +13,19 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 public class GitHubRepoConnectionHandlerImpl implements GitHubRepoConnectionHandler {
-    private final HttpClientConnectionManager connectionManager;
+    private final @NotNull HttpClientConnectionManager connectionManager;
     private CloseableHttpClient httpClients;
     final RateLimiter rateLimiter;
 
-    public GitHubRepoConnectionHandlerImpl(HttpClientConnectionManager connectionManager) {
+    public GitHubRepoConnectionHandlerImpl(
+            @NotNull HttpClientConnectionManager connectionManager,
+            double masRequestsPerSecond) {
         this.connectionManager = connectionManager;
-        this.rateLimiter = RateLimiter.create(2.0);
+        this.rateLimiter = RateLimiter.create(masRequestsPerSecond);
     }
 
     @Override
@@ -51,10 +54,8 @@ public class GitHubRepoConnectionHandlerImpl implements GitHubRepoConnectionHand
             }
         } catch (ClientProtocolException e) {
             // TODO Handle protocol errors
-            e.printStackTrace();
             return "";
         } catch (IOException e) {
-            // TODO Handle I/O errors
             e.printStackTrace();
             return "";
         }
@@ -66,7 +67,6 @@ public class GitHubRepoConnectionHandlerImpl implements GitHubRepoConnectionHand
             try {
                 httpClients.close();
             } catch (IOException e) {
-                // TODO handle I/O errors
                 e.printStackTrace();
             }
         }

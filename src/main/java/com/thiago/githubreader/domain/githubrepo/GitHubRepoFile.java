@@ -4,17 +4,17 @@ import com.thiago.githubreader.domain.BytesSize;
 import com.thiago.githubreader.domain.FileName;
 import com.thiago.githubreader.domain.LineCount;
 
-import javax.validation.constraints.NotBlank;
-
-public class GitHubFile {
+public class GitHubRepoFile {
     private final BytesSize bytesSize;
     private final LineCount lineCount;
     private final FileName fileName;
 
-    public GitHubFile(@NotBlank String html) {
-        this.bytesSize = new BytesSize(html);
-        this.lineCount = new LineCount(html);
-        this.fileName = new FileName(html);
+    public GitHubRepoFile(BytesSize bytesSize,
+                          LineCount lineCount,
+                          FileName fileName) {
+        this.bytesSize = bytesSize;
+        this.lineCount = lineCount;
+        this.fileName = fileName;
     }
 
     public BytesSize getBytesSize() {

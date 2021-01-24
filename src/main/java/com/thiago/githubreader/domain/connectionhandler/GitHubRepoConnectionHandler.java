@@ -1,4 +1,4 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.connectionhandler;
 
 import javax.validation.constraints.NotBlank;
 

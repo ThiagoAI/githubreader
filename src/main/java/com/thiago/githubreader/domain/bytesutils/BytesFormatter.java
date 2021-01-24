@@ -1,4 +1,4 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.bytesutils;
 
 public final class BytesFormatter {
     public static String formatBytes(double bytes) {

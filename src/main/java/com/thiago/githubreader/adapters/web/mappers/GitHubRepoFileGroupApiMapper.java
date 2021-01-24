@@ -12,7 +12,7 @@ public final class GitHubRepoFileGroupApiMapper {
                 .totalSize(String.valueOf(gitHubRepoFileExtensionList.getTotalBytesFormattedString()))
                 .lineCount(BigDecimal.valueOf(gitHubRepoFileExtensionList.getTotalLines()))
                 .fileExtension(gitHubRepoFileExtensionList.getFileExtension())
-                .files(gitHubRepoFileExtensionList.getList().stream().map(
+                .files(gitHubRepoFileExtensionList.getCopyOfAllFiles().stream().map(
                         file -> GitHubRepoFileApiMapper.toReadRepoFileApiModel(file))
                         .collect(Collectors.toList())
                 );

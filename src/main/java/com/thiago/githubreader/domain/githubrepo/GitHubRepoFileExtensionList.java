@@ -1,6 +1,6 @@
 package com.thiago.githubreader.domain.githubrepo;
 
-import com.thiago.githubreader.domain.BytesFormatter;
+import com.thiago.githubreader.domain.bytesutils.BytesFormatter;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -9,20 +9,20 @@ public class GitHubRepoFileExtensionList {
     private long totalLines;
     private double totalBytes;
     private final @NotNull String fileExtension;
-    private final @NotNull List<GitHubFile> list;
+    private final @NotNull List<GitHubRepoFile> list;
 
     public GitHubRepoFileExtensionList(@NotNull String fileExtension,
-                                       @NotNull List<GitHubFile> list) {
+                                       @NotNull List<GitHubRepoFile> list) {
         this.fileExtension = fileExtension;
         this.list = list;
         this.totalLines = 0;
         this.totalBytes = 0;
     }
 
-    public void addFile(@NotNull GitHubFile gitHubFile) {
-        this.list.add(gitHubFile);
-        this.totalBytes += gitHubFile.getBytesSize().getBytes();
-        this.totalLines += gitHubFile.getLineCount().getNumberOfLines();
+    public void addFile(@NotNull GitHubRepoFile gitHubRepoFile) {
+        this.list.add(gitHubRepoFile);
+        this.totalBytes += gitHubRepoFile.getBytesSize().getBytes();
+        this.totalLines += gitHubRepoFile.getLineCount().getNumberOfLines();
     }
 
     public long getTotalLines() {
@@ -41,8 +41,8 @@ public class GitHubRepoFileExtensionList {
         return fileExtension;
     }
 
-    public List<GitHubFile> getList() {
-        return list;
+    public List<GitHubRepoFile> getCopyOfAllFiles() {
+        return List.copyOf(this.list);
     }
 
     public long fileCount() {

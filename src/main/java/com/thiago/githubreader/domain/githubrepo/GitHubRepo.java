@@ -1,10 +1,10 @@
 package com.thiago.githubreader.domain.githubrepo;
 
-import com.thiago.githubreader.domain.GitHubRepoConnectionHandler;
-import com.thiago.githubreader.domain.GitHubRepoFileGetter;
+import com.thiago.githubreader.domain.connectionhandler.GitHubRepoConnectionHandler;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GitHubRepo {
@@ -14,19 +14,18 @@ public class GitHubRepo {
     public GitHubRepo(@NotBlank String url, @NotNull GitHubRepoConnectionHandler connectionHandler) {
         this.url = url;
         this.gitHubRepoFileContainer = new GitHubRepoFileContainer(new ConcurrentHashMap<>());
-        GitHubRepoFileGetter.GetFilesInfoFromRepo(this, connectionHandler);
     }
 
     public String getUrl() {
         return url;
     }
 
-    public GitHubRepoFileContainer getGitHubRepoFileContainer() {
-        return gitHubRepoFileContainer;
-    }
-
     public double getTotalBytes() {
         return this.gitHubRepoFileContainer.getTotalBytes();
+    }
+
+    public List<GitHubRepoFileExtensionList> getCopyListOfFileExtensionGroups() {
+        return this.gitHubRepoFileContainer.getCopyOfAllFileExtensionGroups();
     }
 
     public String getTotalBytesFormattedString() {
@@ -39,5 +38,9 @@ public class GitHubRepo {
 
     public long getFileCount() {
         return this.gitHubRepoFileContainer.fileCount();
+    }
+
+    public void addRepoFile(GitHubRepoFile file) {
+        this.gitHubRepoFileContainer.addFile(file);
     }
 }

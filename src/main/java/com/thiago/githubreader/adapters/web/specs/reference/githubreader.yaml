@@ -3,12 +3,12 @@ info:
   title: GitHubReader
   version: '1.0'
   description: API for GitHubRepoReader.
-servers: []
+servers: [ ]
 paths:
   /readrepo:
     post:
       summary: Read repo
-      tags: []
+      tags: [ ]
       responses:
         '200':
           description: OK
@@ -27,7 +27,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ReadRepoRequest'
-    parameters: []
+    parameters: [ ]
 components:
   schemas:
     ReadRepoResponse:

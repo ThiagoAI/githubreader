@@ -1,9 +1,11 @@
 package com.thiago.githubreader.domain.githubrepo;
 
-import com.thiago.githubreader.domain.BytesFormatter;
+import com.thiago.githubreader.domain.bytesutils.BytesFormatter;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GitHubRepoFileContainer {
     private long totalLines;
@@ -16,7 +18,7 @@ public class GitHubRepoFileContainer {
         this.totalLines = 0;
     }
 
-    public void addFile(GitHubFile file) {
+    public void addFile(GitHubRepoFile file) {
         // If there is no list yet, creates one
         if (this.map.get(file.getFileExtension()) == null) {
             this.map.put(file.getFileExtension(),
@@ -26,7 +28,6 @@ public class GitHubRepoFileContainer {
             );
         }
         this.map.get(file.getFileExtension()).addFile(file);
-        // TODO check for async issues with total bytes and line
         this.totalBytes += file.getBytesSize().getBytes();
         this.totalLines += file.getLineCount().getNumberOfLines();
     }
@@ -50,5 +51,12 @@ public class GitHubRepoFileContainer {
     public long fileCount() {
         return this.map.values().stream()
                 .map(i -> i.fileCount()).reduce(0L, (i, e) -> i + e);
+    }
+
+    public List<GitHubRepoFileExtensionList> getCopyOfAllFileExtensionGroups() {
+        return this.map.values().stream().collect(Collectors.toList());
+//        List<GitHubRepoFile> list = new ArrayList<>();
+//        this.map.values().stream().forEach(l -> list.addAll(l.getCopyOfAllFiles()));
+//        return list;
     }
 }

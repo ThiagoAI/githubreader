@@ -1,4 +1,4 @@
-package com.thiago.githubreader.domain;
+package com.thiago.githubreader.domain.bytesutils;
 
 public final class BytesConstants {
     public static final long KB_MULTIPLIER = 1024;
