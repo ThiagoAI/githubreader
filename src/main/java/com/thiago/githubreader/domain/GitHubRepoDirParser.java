@@ -7,8 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GitHubRepoDirParser {
-    private static String GITHUB_BASE_URL = "https://github.com";
-
     /**
      * Reads a github dir html and gets all urls for files and dirs within that dir
      *
@@ -25,7 +23,7 @@ public class GitHubRepoDirParser {
         // Add tem to the list
         while (matcher.find()) {
             if (matcher.group(1) != "")
-                list.add(GITHUB_BASE_URL + matcher.group(1));
+                list.add(GitHubConstants.GITHUB_BASE_URL + matcher.group(1));
         }
 
         return list;

@@ -1,6 +1,7 @@
 package com.thiago.githubreader.application.services;
 
 import com.thiago.githubreader.application.ports.in.ReadGitHubRepoUseCase;
+import com.thiago.githubreader.domain.GitHubConstants;
 import com.thiago.githubreader.domain.GitHubRepo;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandler;
 import com.thiago.githubreader.domain.GitHubRepoConnectionHandlerImpl;
@@ -9,7 +10,10 @@ import org.apache.http.conn.HttpClientConnectionManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotBlank;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -19,13 +23,11 @@ public class ReadGitHubRepoUseCaseImpl implements ReadGitHubRepoUseCase {
 
     @Async
     @Override
-    public CompletableFuture<GitHubRepo> readGitHubRepo(@NotBlank String gitHubUrl) {
+    public CompletableFuture<GitHubRepo> readGitHubRepo(@NotBlank String gitHubUrl) throws URISyntaxException {
         // Validate input
-        if (gitHubUrl == null || gitHubUrl == "")
-            return null;
-
-//        UrlValidator urlValidator = new UrlValidator();
-//        urlValidator.isValid("http://my favorite site!");
+        if (gitHubUrl == null || gitHubUrl == "" ||
+                !new URI(gitHubUrl).getHost().equals(GitHubConstants.GITHUB_HOST))
+            throw new ValidationException();
 
         // Stablishes connection to repo
         GitHubRepo gitHubRepo;
