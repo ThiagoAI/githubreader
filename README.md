@@ -4,7 +4,7 @@ Scrapes a GitHub repo returning the name, line count and byte size of all files,
 
 # Api Endpoints
 
-Detailed API documentation can be found at [GitHubReader.yaml](../blob/main/src/main/java/com/thiago/githubreader/adapters/web/specs/reference/githubreader.yaml) and at this [link](https://thiagoandersimhoff.stoplight.io/docs/githubreporeader-1/GitHubReader.yaml). What follows is a summary.
+Detailed API documentation can be found at [githubreader.yaml](https://github.com/ThiagoAI/githubreader/blob/main/src/main/java/com/thiago/githubreader/adapters/web/specs/reference/githubreader.yaml) and at this [link](https://thiagoandersimhoff.stoplight.io/docs/githubreporeader-1/GitHubReader.yaml). What follows is a summary.
 
 ## Read GitHubRepo  
 
