@@ -1,7 +1,9 @@
 package com.thiago.githubreader.domain.connectionhandler;
 
 import com.revinate.guava.util.concurrent.RateLimiter;
+import com.thiago.githubreader.application.exceptions.GetScrapeRequestFailed;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -39,7 +41,7 @@ public class GitHubRepoConnectionHandlerImpl implements GitHubRepoConnectionHand
     }
 
     @Override
-    public String httpGetRequestToString(@NotBlank String url) {
+    public String httpGetRequestToString(@NotBlank String url) throws GetScrapeRequestFailed {
         rateLimiter.acquire();
         HttpGet httpget = new HttpGet(url);
         HttpClientContext context = HttpClientContext.create();
@@ -47,17 +49,19 @@ public class GitHubRepoConnectionHandlerImpl implements GitHubRepoConnectionHand
             CloseableHttpResponse response = httpClients.execute(
                     httpget, context);
             try {
+                if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+                    throw new GetScrapeRequestFailed(url, response.getStatusLine().getStatusCode());
                 HttpEntity entity = response.getEntity();
                 return EntityUtils.toString(entity);
             } finally {
                 response.close();
             }
         } catch (ClientProtocolException e) {
-            // TODO Handle protocol errors
-            return "";
+            e.printStackTrace();
+            throw new GetScrapeRequestFailed(url, e);
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            throw new GetScrapeRequestFailed(url, e);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.thiago.githubreader.domain.githubscraping;
 
+import com.thiago.githubreader.application.exceptions.GetScrapeRequestFailed;
 import com.thiago.githubreader.domain.connectionhandler.GitHubRepoConnectionHandler;
 import com.thiago.githubreader.domain.githubrepo.GitHubRepoFile;
 import com.thiago.githubreader.domain.githubscraping.parsers.GitHubRepoDirParser;
@@ -29,29 +30,34 @@ public class GitHubRepoGetThread implements Runnable {
 
     @Override
     public void run() {
-        String html = gitHubRepoConnectionHandler.httpGetRequestToString(this.url);
-        if (!html.equals("")) {
-            // If it's a file, creates file
-            if (GitHubRepoFileParser.isPageFile(html)) {
-                // If file is not already inserted, inserts
-                GitHubRepoFile file = GitHubRepoFileParser.parseToFile(html);
-                this.gitHubRepoFileGetterExecutionController
-                        .checkIfAvailableAndInsertIfSoFile(this.url, file);
-            } else {
-                // If it's a dir, creates new thread for every file/dir inside the current dir
-                List<String> urls = GitHubRepoDirParser.getDirOrFileUrls(html);
+        try {
+            String html = gitHubRepoConnectionHandler.httpGetRequestToString(this.url);
+            if (!html.equals("")) {
+                // If it's a file, creates file
+                if (GitHubRepoFileParser.isPageFile(html)) {
+                    // If file is not already inserted, inserts
+                    GitHubRepoFile file = GitHubRepoFileParser.parseToFile(html);
+                    this.gitHubRepoFileGetterExecutionController
+                            .checkIfAvailableAndInsertIfSoFile(this.url, file);
+                } else {
+                    // If it's a dir, creates new thread for every file/dir inside the current dir
+                    List<String> urls = GitHubRepoDirParser.getDirOrFileUrls(html);
 
-                // Creates a new thread for every dir/file, checks for dirs already searched
-                urls.stream()
-                        .filter(u -> this.gitHubRepoFileGetterExecutionController.checkIfAvailableAndInsertIfSoDir(u))
-                        .forEach(u -> this.executorService.execute(new GitHubRepoGetThread(
-                                        u,
-                                        this.gitHubRepoConnectionHandler,
-                                        this.executorService,
-                                        this.gitHubRepoFileGetterExecutionController)
-                                )
-                        );
+                    // Creates a new thread for every dir/file, checks for dirs already searched
+                    urls.stream()
+                            .filter(u -> this.gitHubRepoFileGetterExecutionController.checkIfAvailableAndInsertIfSoDir(u))
+                            .forEach(u -> this.executorService.execute(new GitHubRepoGetThread(
+                                            u,
+                                            this.gitHubRepoConnectionHandler,
+                                            this.executorService,
+                                            this.gitHubRepoFileGetterExecutionController)
+                                    )
+                            );
+                }
             }
+        } catch (GetScrapeRequestFailed e) {
+            e.printStackTrace();
+           this.gitHubRepoFileGetterExecutionController.addException(url, e);
         }
     }
 }

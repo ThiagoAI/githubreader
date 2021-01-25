@@ -34,8 +34,9 @@ public class ReadGitHubRepoUseCaseImpl implements ReadGitHubRepoUseCase {
     @Override
     public CompletableFuture<GitHubRepo> readGitHubRepo(@NotBlank String gitHubUrl) throws URISyntaxException {
         // Validates input
-        if (gitHubUrl == null || gitHubUrl == "" ||
-                !new URI(gitHubUrl).getHost().equals(GitHubConstants.GITHUB_HOST))
+        URI uri = new URI(gitHubUrl);
+        if (gitHubUrl == null || gitHubUrl == ""  || uri.getHost() == null ||
+                !uri.getHost().equals(GitHubConstants.GITHUB_HOST))
             throw new ValidationException();
 
         // Stablishes connection to repo
